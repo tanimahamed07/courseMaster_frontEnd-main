@@ -101,44 +101,40 @@ export default function Login() {
               </button>
             </div>
 
-            {/* Dev Route Inspector Bypass */}
-            <div className="pt-2 border-t border-base-300/80">
-              <p className="text-[11px] font-semibold text-base-content/70 mb-1.5 flex items-center justify-between">
-                <span>🔓 Direct Login & Inspect Routes (Dev Bypass):</span>
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    const token =
-                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYzFmMzdlNjYwMDZmMWRjYmI1YjUyNiIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzkxMDk4NTg4fQ.4s3Ygh9GtTper2SB8byNILxPSxZ8y3pO-WyFupmQ0Ws";
-                    localStorage.setItem("token", token);
-                    localStorage.setItem("user_token", token);
-                    localStorage.setItem("dev_bypass", "true");
-                    navigate("/student");
-                    window.location.reload();
-                  }}
-                  className="btn btn-xs btn-primary font-bold text-xs"
-                >
-                  🎓 Student Portal
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const token =
-                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYzFmMzdlNjYwMDZmMWRjYmI1YjUyNSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc5MTA5ODU4OH0.vL3Hj-fEGVbouM-cZ9RtMIpaCU5ugRwsNqaKyYdxdNY";
-                    localStorage.setItem("token", token);
-                    localStorage.setItem("user_token", token);
-                    localStorage.setItem("dev_bypass", "true");
-                    navigate("/admin");
-                    window.location.reload();
-                  }}
-                  className="btn btn-xs btn-secondary font-bold text-xs"
-                >
-                  👑 Admin Portal
-                </button>
+            {/* Dev Route Inspector Bypass - Development Only */}
+            {import.meta.env.DEV && (
+              <div className="pt-2 border-t border-base-300/80">
+                <p className="text-[11px] font-semibold text-base-content/70 mb-1.5 flex items-center justify-between">
+                  <span>🔓 Quick Test Login (Dev Only):</span>
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setForm({
+                        email: "student@coursemaster.com",
+                        password: "student123",
+                      });
+                    }}
+                    className="btn btn-xs btn-primary font-bold text-xs"
+                  >
+                    🎓 Student Fill
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setForm({
+                        email: "admin@coursemaster.com",
+                        password: "admin123",
+                      });
+                    }}
+                    className="btn btn-xs btn-secondary font-bold text-xs"
+                  >
+                    👑 Admin Fill
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {error && (

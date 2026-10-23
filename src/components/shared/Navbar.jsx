@@ -56,39 +56,29 @@ export default function Navbar() {
         {/* CENTER: Desktop menu */}
         <div className="navbar-center hidden md:flex">
           <ul className="menu menu-horizontal gap-1">
-            <li>
               <NavLink className={navLinkClass} to="/">
                 Home
               </NavLink>
-            </li>
-            <li>
               <NavLink className={navLinkClass} to="/courses">
                 Courses
               </NavLink>
-            </li>
 
             {/* ✅ Dashboard when logged in OR when dev_bypass is active */}
             {token && me ? (
-              <li>
                 <NavLink
                   className={navLinkClass}
                   to={me.role === "admin" ? "/admin" : "/student"}
                 >
                   Dashboard
                 </NavLink>
-              </li>
             ) : localStorage.getItem("dev_bypass") === "true" ? (
               <>
-                <li>
                   <NavLink className={navLinkClass} to="/student">
                     Student Portal
                   </NavLink>
-                </li>
-                <li>
                   <NavLink className={navLinkClass} to="/admin">
                     Admin Portal
                   </NavLink>
-                </li>
               </>
             ) : null}
           </ul>
@@ -139,9 +129,6 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/profile">Profile</Link>
-                </li>
-                <li>
                   <button onClick={handleLogout} className="text-red-500">
                     Logout
                   </button>
@@ -174,30 +161,24 @@ export default function Navbar() {
               className="
                 menu menu-sm dropdown-content mt-3 p-3 shadow
                 bg-base-100 rounded-box w-56 border border-base-300
-                items-center text-center max-h-32 overflow-hidden
+                items-center text-center max-h-96 overflow-y-auto
               "
             >
-              <li>
                 <NavLink className={navLinkClass} to="/">
                   Home
                 </NavLink>
-              </li>
-              <li>
                 <NavLink className={navLinkClass} to="/courses">
                   Courses
                 </NavLink>
-              </li>
 
               {/* ✅ Dashboard only when logged in */}
               {token && me && (
-                <li>
                   <NavLink
                     className={navLinkClass}
                     to={me.role === "admin" ? "/admin" : "/student"}
                   >
                     Dashboard
                   </NavLink>
-                </li>
               )}
 
               <div className="my-2 w-full border-t border-base-300" />
@@ -241,7 +222,6 @@ export default function Navbar() {
                   </li>
 
                   <li className="w-full">
-                    <Link to="/profile">Profile</Link>
                   </li>
                   <li className="w-full">
                     <button

@@ -8,13 +8,15 @@ export default function ProtectedRoute({ children }) {
   const token = getToken();
 
   useEffect(() => {
-    // Check if dev bypass is enabled for testing/grading protected routes
-    const isBypass =
-      localStorage.getItem("dev_bypass") === "true" ||
-      window.location.search.includes("bypass=true");
-    if (isBypass) {
-      setIsValid(true);
-      return;
+    // Only allow bypass in development environment
+    if (import.meta.env.DEV) {
+      const isBypass =
+        localStorage.getItem("dev_bypass") === "true" ||
+        window.location.search.includes("bypass=true");
+      if (isBypass) {
+        setIsValid(true);
+        return;
+      }
     }
 
     if (!token) {
